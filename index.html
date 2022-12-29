@@ -23,30 +23,55 @@
         const playRound = (playerSelection, computerSelection) => {
             if(playerSelection == "rock") {
                 if(computerSelection == "rock")
-                    return "You tied";
-                else if(computerSelection = "paper")
-                    return "You lose, Paper beats Rock";
+                    return "tie";
+                else if(computerSelection == "paper")
+                    return "lose";
                 else
-                    return "You Win, Rock beats Scissors";
+                    return "win";
             }
-            else if(playerSelection = "paper") {
+            else if(playerSelection == "paper") {
                 if(computerSelection == "paper")
-                    return "You tied";
-                else if(computerSelection = "scissors")
-                    return "You lose, Scissors beats Paper";
+                    return "tie";
+                else if(computerSelection == "scissors")
+                    return "lose";
                 else
-                    return "You Win, Paper beats Rock";
+                    return "win";
             }
-            else {
+            else if(playerSelection == "scissors") {
                 if(computerSelection == "scissors")
-                    return "You tied";
-                else if(computerSelection = "rock")
-                    return "You lose, Rock beats Scissors";
+                    return "tie";
+                else if(computerSelection == "rock")
+                    return "lose";
                 else
-                    return "You Win, Scissors beats Paper";
+                    return "win";
             }
+            else 
+                return "incorrect"
         }
 
+        const game = () => {
+            let playerScore = 0;
+
+            for(let i = 0; i < 5; i++) {
+                const playerSelection = prompt("Choose Rock, Paper or Scissors");
+                const computerSelection = getComputerChoice();
+                const result = playRound(playerSelection, computerSelection);
+
+                if(result == "incorrect")
+                    console.log("Make sure to spell your choice correctly");
+                else if(result == "tie") 
+                    console.log(`You tied, you both choose ${playerSelection}`);
+                else if(result == "win") {
+                    console.log(`You won, ${playerSelection} beats ${computerSelection}`);
+                    playerScore++;
+                }
+                else if(result == "lose") 
+                    console.log(`You lose, ${computerSelection} beats ${playerSelection}`);
+
+                if(i == 4)
+                    console.log(`Final score: ${playerScore} points`)
+            }
+        }
     </script>
 </body>
 </html>
