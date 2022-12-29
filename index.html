@@ -12,12 +12,41 @@
         const getComputerChoice = () => {
             const random = Math.floor(Math.random() * 3);
             if(random == 0)
-                return "Rock";
+                return "rock";
             else if(random == 1)
-                return "Paper";
+                return "paper";
             else
-                return "Scissors";
+                return "scissors";
         }
+
+        // Returns string based on the player and computer selection
+        const playRound = (playerSelection, computerSelection) => {
+            if(playerSelection == "rock") {
+                if(computerSelection == "rock")
+                    return "You tied";
+                else if(computerSelection = "paper")
+                    return "You lose, Paper beats Rock";
+                else
+                    return "You Win, Rock beats Scissors";
+            }
+            else if(playerSelection = "paper") {
+                if(computerSelection == "paper")
+                    return "You tied";
+                else if(computerSelection = "scissors")
+                    return "You lose, Scissors beats Paper";
+                else
+                    return "You Win, Paper beats Rock";
+            }
+            else {
+                if(computerSelection == "scissors")
+                    return "You tied";
+                else if(computerSelection = "rock")
+                    return "You lose, Rock beats Scissors";
+                else
+                    return "You Win, Scissors beats Paper";
+            }
+        }
+
     </script>
 </body>
 </html>
