@@ -12,9 +12,12 @@
     <button id="paper">Paper</button>
     <button id="scissors">Scissors</button>
 
-    <div id="score"></div>
+    <div id="score"></div><br>
+    <div id="points"></div>
 
     <script>
+        let playerPoints = 0;
+
         // Returns string based on the random choice
         const getComputerChoice = () => {
             const random = Math.floor(Math.random() * 3);
@@ -61,22 +64,33 @@
                 div.textContent = `You tied, you both choose ${playerSelection}`;
             else if(result == "win") {
                 div.textContent = `You won, ${playerSelection} beats ${computerSelection}`;
-                playerScore++;
             }
             else if(result == "lose") 
                 div.textContent = `You lose, ${computerSelection} beats ${playerSelection}`;
+            else if(playerPoints == 5) 
+                div.textContent = "You won the game"
+        }
+
+        const printPoints = () => {
+            const div = document.querySelector("#points");
+            div.textContent = `Player points: ${playerPoints}`
+        }
+
+        const addPoints = result => {
+            if(result == "win")
+                playerPoints++;
+        }
+
+        const game = e => {
+            const computerSelection = getComputerChoice();
+            const result = playRound(e.target.id, computerSelection);
+            printScore(e.target.id, computerSelection, result);
+            addPoints(result);
+            printPoints();
         }
 
         const buttons = document.querySelectorAll("button");
-        
-        buttons.forEach(button => {
-            addEventListener("click", (e) => {
-                const computerSelection = getComputerChoice();
-                const result = playRound(e.target.id, computerSelection);
-                printScore(e.target.id, computerSelection, result);
-            })
-        });
-        
+        buttons.forEach(button => addEventListener("click", game));
     </script>
 </body>
 </html>
