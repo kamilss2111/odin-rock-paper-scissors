@@ -60,15 +60,17 @@
         const printScore = (playerSelection ,computerSelection, result) => {
             const div = document.querySelector("#score");
 
-            if(result == "tie") 
+            if(playerPoints == 5) {
+                div.textContent = "You won the game";
+                removeButtonsListeners();
+            }
+            else if(result == "tie") 
                 div.textContent = `You tied, you both choose ${playerSelection}`;
             else if(result == "win") {
                 div.textContent = `You won, ${playerSelection} beats ${computerSelection}`;
             }
             else if(result == "lose") 
                 div.textContent = `You lose, ${computerSelection} beats ${playerSelection}`;
-            else if(playerPoints == 5) 
-                div.textContent = "You won the game"
         }
 
         const printPoints = () => {
@@ -90,6 +92,11 @@
         }
 
         const buttons = document.querySelectorAll("button");
+
+        const removeButtonsListeners = () => {
+            buttons.forEach(button => button.removeEventListener("click"))
+        }
+
         buttons.forEach(button => addEventListener("click", game));
     </script>
 </body>
