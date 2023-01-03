@@ -7,6 +7,11 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
+
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+
     <script>
         // Returns string based on the random choice
         const getComputerChoice = () => {
@@ -49,24 +54,12 @@
                 return "incorrect"
         }
 
-        const game = () => {
-            let playerScore = 0;
+        const buttons = document.querySelectorAll("button");
+        
+        buttons.forEach(addEventListener("click", (e) => {
+            const result = playRound(e.target.id, getComputerChoice);
+        }));
 
-            const playerSelection = prompt("Choose Rock, Paper or Scissors");
-            const computerSelection = getComputerChoice();
-            const result = playRound(playerSelection, computerSelection);
-
-            if(result == "incorrect")
-                console.log("Make sure to spell your choice correctly");
-            else if(result == "tie") 
-                console.log(`You tied, you both choose ${playerSelection}`);
-            else if(result == "win") {
-                console.log(`You won, ${playerSelection} beats ${computerSelection}`);
-                playerScore++;
-            }
-            else if(result == "lose") 
-                console.log(`You lose, ${computerSelection} beats ${playerSelection}`);
-        }
     </script>
 </body>
 </html>
