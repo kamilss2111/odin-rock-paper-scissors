@@ -12,6 +12,8 @@
     <button id="paper">Paper</button>
     <button id="scissors">Scissors</button>
 
+    <div id="score"></div>
+
     <script>
         // Returns string based on the random choice
         const getComputerChoice = () => {
@@ -50,16 +52,31 @@
                 else
                     return "win";
             }
-            else 
-                return "incorrect"
+        }
+
+        const printScore = (playerSelection ,computerSelection, result) => {
+            const div = document.querySelector("#score");
+
+            if(result == "tie") 
+                div.textContent = `You tied, you both choose ${playerSelection}`;
+            else if(result == "win") {
+                div.textContent = `You won, ${playerSelection} beats ${computerSelection}`;
+                playerScore++;
+            }
+            else if(result == "lose") 
+                div.textContent = `You lose, ${computerSelection} beats ${playerSelection}`;
         }
 
         const buttons = document.querySelectorAll("button");
         
-        buttons.forEach(addEventListener("click", (e) => {
-            const result = playRound(e.target.id, getComputerChoice);
-        }));
-
+        buttons.forEach(button => {
+            addEventListener("click", (e) => {
+                const computerSelection = getComputerChoice();
+                const result = playRound(e.target.id, computerSelection);
+                printScore(e.target.id, computerSelection, result);
+            })
+        });
+        
     </script>
 </body>
 </html>
